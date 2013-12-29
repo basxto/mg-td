@@ -1,0 +1,278 @@
+<?xml version="1.0" standalone="no"?>
+
+<unit>
+
+	<!-- *** parameters *** -->
+
+	<parameters>
+		<size value="1"/>
+		<height value="2"/>
+		<max-hp value="5000" regeneration="1000"/>
+		<max-ep value="0"/>
+		<armor value="0"/>
+		<armor-type value="leather"/>					
+		<sight value="1"/>
+		<time value="40"/>	
+		<multi-selection value="false"/>	
+		<cellmap value="false"/>
+		<levels/>
+		<fields>
+			<field value="land"/>
+		</fields>	
+		<properties/>
+		<light enabled="false"/>
+		<unit-requirements/>
+		<upgrade-requirements/>
+		<resource-requirements>
+			<resource name="gold" amount="0"/>
+			<resource name="time" amount="1"/>	
+			<resource name="wave" amount="0"/>
+			<resource name="lives" amount="0"/>		
+		</resource-requirements>
+		<resources-stored>
+			<resource name= "gold" amount="2000"/>			
+			<resource name= "time" amount="60"/>
+			<resource name= "wave" amount="4"/>	
+			<resource name= "lives" amount="10"/>	
+		</resources-stored>
+		<image path="images/worker.bmp"/>
+		<image-cancel path="../defense_tower/images/tech_cancel.bmp"/>
+		<meeting-point value="false"/>
+		<selection-sounds enabled="true">
+			<sound path="$COMMONDATAPATH/sounds/worker_select1.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_select2.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_select3.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_select4.wav"/>					
+		</selection-sounds>
+		<command-sounds enabled="true">
+			<sound path="$COMMONDATAPATH/sounds/worker_ack1.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack2.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack3.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack4.wav"/>		
+			<sound path="$COMMONDATAPATH/sounds/worker_ack5.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack6.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack7.wav"/>					
+		</command-sounds>
+	</parameters>
+
+
+	<!-- *** skills *** -->
+
+	<skills>
+	
+		<skill>
+			<type value="stop"/>
+			<name value="stop_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="1000"/>
+			<anim-speed value="55"/>
+			<animation path="models/worker_standing.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+		
+		<skill>
+			<type value="stop"/>
+			<name value="stop_loaded_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="75"/>
+			<anim-speed value="70"/>
+			<animation path="models/worker_standing_loaded.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+		<skill>
+			<type value="stop"/>
+			<name value="stop_loaded_wood_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="75"/>
+			<anim-speed value="70"/>
+			<animation path="models/worker_standing_loaded_wood.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+		<skill>
+			<type value="move"/>
+			<name value="move_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="4000"/>
+			<anim-speed value="130"/>
+			<animation path="models/worker_walking.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+		<skill>
+			<type value="move"/>
+			<name value="move_wood_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="210"/>
+			<anim-speed value="130"/>
+			<animation path="models/worker_walking_wood.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+		<skill>
+			<type value="move"/>
+			<name value="move_gold_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="210"/>
+			<anim-speed value="130"/>
+			<animation path="models/worker_walking_gold.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+		<skill>
+			<type value="move"/>
+			<name value="move_loaded_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="190"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_walking_loaded.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+		<skill>
+			<type value="move"/>
+			<name value="move_loaded_wood_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="190"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_walking_loaded_wood.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+		
+		<skill>
+			<type value="build"/>
+			<name value="build_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="4000"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_building.g3d"/>
+			<sound enabled="true" start-time="0.5">
+				<sound-file path="$COMMONDATAPATH/sounds/worker_build1.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_build2.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_build3.wav"/>
+			</sound>
+		</skill>	
+		
+		<skill>
+			<type value="harvest"/>
+			<name value="mine_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="225"/>
+			<anim-speed value="90"/>
+			<animation path="models/worker_mining.g3d"/>
+			<sound enabled="true" start-time="0.5">
+				<sound-file path="$COMMONDATAPATH/sounds/worker_mine1.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_mine2.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_mine3.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_mine4.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_mine5.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_mine6.wav"/>
+			</sound>
+		</skill>	
+		
+		<skill>
+			<type value="harvest"/>
+			<name value="harvest_wood_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="150"/>
+			<anim-speed value="90"/>
+			<animation path="models/worker_harversting_wood.g3d"/>
+			<sound enabled="true" start-time="0.5">
+				<sound-file path="$COMMONDATAPATH/sounds/worker_harvest_wood1.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_harvest_wood2.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_harvest_wood3.wav"/>
+			</sound>
+		</skill>		
+		
+		<skill>
+			<type value="repair"/>
+			<name value="repair_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="40"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_building.g3d"/>
+			<sound enabled="true" start-time="0.5">
+				<sound-file path="$COMMONDATAPATH/sounds/worker_build1.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_build2.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_build3.wav"/>
+			</sound>
+		</skill>		
+		
+		<skill>
+			<type value="die"/>
+			<name value="die_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="90"/>
+			<anim-speed value="90"/>
+			<animation path="models/worker_dying.g3d"/>
+			<sound enabled="true" start-time="0">
+				<sound-file path="$COMMONDATAPATH/sounds/worker_die1.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_die2.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_die3.wav"/>								
+			</sound>			
+			<fade value="false"/>
+		</skill>						
+		
+		<skill>
+			<type value="morph"/>
+			<name value="morph_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="500"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_standing.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+	</skills>
+
+	<!-- *** commands *** -->
+	
+	<commands>
+		
+		<command>
+			<type value= "stop"/>
+			<name value="stop"/>
+			<image path="../defense_tower/images/tech_stop.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<stop-skill value="stop_skill"/>
+		</command>
+
+		<command>
+			<type value= "move"/>
+			<name value="move"/>
+			<image path="../defense_tower/images/tech_move.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<move-skill value="move_skill"/>
+		</command>
+
+
+		<command>
+			<type value= "build"/>
+			<name value="build_advanced"/>
+			<image path="images/worker_build_advanced.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<move-skill value="move_skill"/>
+			<build-skill value="build_skill"/>
+			<buildings>
+				<building name="snake_basket"/>
+				<building name="defense_tower"/>
+				<building name="golem"/>
+				<building name="air_pyramid"/>
+				<building name="sphinx"/>
+				<building name="tower_of_souls"/>
+				<building name="mistletree"/>
+                	</buildings>
+			<start-sound enabled="false"/>
+			<built-sound enabled="true">
+				<sound-file path="$COMMONDATAPATH/sounds/worker_work_end1.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_work_end2.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_work_end3.wav"/>							
+			</built-sound>	
+		</command>
+
+
+	</commands>
+</unit>

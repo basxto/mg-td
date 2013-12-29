@@ -1,0 +1,9 @@
+welcome=Welcome to TowerDefense v%s
+pos=position: %s, %s
+won=%s died at last
+lost=%s just died
+nextwave=Wave #%s is coming!
+interest=%s gained %s gold!
+DESCRIPTION=A TowerDefense game
+SCENARIO_NAME=TowerDefense
+TUTORIAL_NAME=TowerDefense

@@ -1,0 +1,107 @@
+<?xml version="1.0" standalone="no"?>
+
+<unit>
+
+	<!-- *** parameters *** -->
+
+	<parameters>
+		<size value="1"/>
+		<height value="2"/>
+		<max-hp value="5000" regeneration="1000"/>
+		<max-ep value="0"/>
+		<armor value="0"/>
+		<armor-type value="leather"/>					
+		<sight value="1"/>
+		<time value="40"/>	
+		<multi-selection value="true"/>	
+		<cellmap value="false"/>
+		<levels/>
+		<fields>
+			<field value="land"/>
+		</fields>	
+		<properties/>
+		<light enabled="false"/>
+		<unit-requirements/>
+		<upgrade-requirements/>
+		<resource-requirements>
+			<resource name="gold" amount="0"/>
+			<resource name="time" amount="1"/>	
+			<resource name="wave" amount="0"/>
+			<resource name="lives" amount="0"/>		
+		</resource-requirements>
+		<resources-stored>
+			<resource name= "gold" amount="2000"/>			
+			<resource name= "time" amount="10"/>
+			<resource name= "wave" amount="4"/>	
+			<resource name= "lives" amount="10"/>	
+		</resources-stored>
+		<image path="../worker/images/worker.bmp"/>
+		<image-cancel path="../defense_tower/images/tech_cancel.bmp"/>
+		<meeting-point value="false"/>
+		<selection-sounds enabled="true">
+			<sound path="$COMMONDATAPATH/sounds/worker_select1.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_select2.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_select3.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_select4.wav"/>					
+		</selection-sounds>
+		<command-sounds enabled="true">
+			<sound path="$COMMONDATAPATH/sounds/worker_ack1.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack2.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack3.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack4.wav"/>		
+			<sound path="$COMMONDATAPATH/sounds/worker_ack5.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack6.wav"/>
+			<sound path="$COMMONDATAPATH/sounds/worker_ack7.wav"/>					
+		</command-sounds>
+	</parameters>
+
+
+	<!-- *** skills *** -->
+
+	<skills>
+	
+		<skill>
+			<type value="stop"/>
+			<name value="stop_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="1000"/>
+			<anim-speed value="55"/>
+			<animation path="models/gold.g3d"/>
+			<sound enabled="false"/>
+		</skill>	
+		
+				
+		<skill>
+			<type value="die"/>
+			<name value="die_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="90"/>
+			<anim-speed value="90"/>
+			<animation path="models/gold.g3d"/>
+			<sound enabled="true" start-time="0">
+				<sound-file path="$COMMONDATAPATH/sounds/worker_die1.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_die2.wav"/>
+				<sound-file path="$COMMONDATAPATH/sounds/worker_die3.wav"/>								
+			</sound>			
+			<fade value="false"/>
+		</skill>					
+
+	</skills>
+
+	<!-- *** commands *** -->
+	
+	<commands>
+		
+		<command>
+			<type value= "stop"/>
+			<name value="stop"/>
+			<image path="../defense_tower/images/tech_stop.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<stop-skill value="stop_skill"/>
+		</command>
+
+
+
+	</commands>
+</unit>

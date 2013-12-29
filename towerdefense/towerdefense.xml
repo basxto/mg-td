@@ -1,0 +1,329 @@
+<?xml version="1.0" standalone="yes" ?>
+<scenario>
+	<maxplayers value="8"/>
+	<difficulty value="3"/>
+	<players>
+		<player control="human" faction="towers" team="1"/>
+		<player control="network" faction="towers" team="2"/>
+		<player control="network" faction="towers" team="3"/>
+		<player control="network" faction="towers" team="4"/>
+		<!--player control="cpu" faction="towers" team="2"/>
+		<player control="cpu" faction="towers" team="3"/>
+		<player control="cpu" faction="towers" team="4"/-->
+		<player control="cpu" faction="groundcreeps" team="5"/>
+		<player control="cpu" faction="groundcreeps" team="5"/>
+		<player control="cpu" faction="groundcreeps" team="5"/>
+		<player control="cpu" faction="groundcreeps" team="5"/>
+		
+	</players>
+	<map value="towerdefense" />
+	<tileset value="hell"/>
+	<tech-tree value="towerdefense"/>
+	<default-resources value="true"/>
+	<default-units value="true"/>
+	<fog-of-war value="false"/>
+	<default-victory-conditions value="false"/>
+	<scripts>
+		<global>
+			--TODO special wave-units
+			function isHuman(player)
+				return (string.upper(string.sub(getPlayerName(player), 1, 4))~="*AI*")
+			end
+		
+		
+			--the map always consists of 4 similar, but mirrored fields
+			--mapsize
+			height = 256;
+			width = 256;
+		
+			--how many human players do we have? need to detect, which slots are really used, please use them in a continous order!
+			humans=4;
+			
+			creepsonlane = {0,0,0,0};
+			stillalive = {
+				isHuman(0),
+				isHuman(1),
+				isHuman(2),
+				isHuman(3)
+			}
+			--workers resources should be the same
+			wave = 1;--the wave which is spawned at the moment or the next one which will be spawned
+			maxwaves = 5;
+			wavetimer = 10;
+		
+			--defindes the wave and if it will be repeated
+			--TODO being able to send them!!!
+			waves2 = {
+				{{"pig",3}},
+				{{"sheep",4}},
+				{{"mummy",4}},
+				{{"behemoth",1}},
+				{{"mummy",3},{"behemoth",2}}--is that even possible?
+			}
+			waves = {
+				{"pig",3},
+				{"sheep",4},
+				{"mummy",5},
+				{"behemoth",1}
+			}
+			
+			wavespig = {
+				{"pig",1}
+			}
+			
+			repeatwaves = 0;--0 is infinit
+			wavemultiplyer = 0.3;
+			interest = 0.01;
+			
+			function getWave(wave)
+				--return next unit to send,amount of units in this wave
+				local realwave = wave%table.getn(waves);
+				if realwave == 0 then
+					realwave = table.getn(waves);
+				end
+				local unit = waves[realwave][1];
+				local amount = math.floor(waves[realwave][2]*( math.pow( 1 + wavemultiplyer , ( (wave-realwave) / table.getn(waves)) )));
+				return {unit,amount};
+			end
+			
+			--creep bounty
+			bounty = {
+				pig=1,
+				sheep=2,
+				mummy=3,
+				behemoth=30
+			}
+			
+		
+		
+			--a unit countdown for a wave
+			--because I do not want to send all creeps at once, this should also improve pathfinding
+			creepqueue = getWave(wave)[2];
+		
+		
+			--the path the units shall use in the upper left square
+			path = {{
+				{89,19},
+				{89,40},
+				{32,40},
+				{32,56},
+				{89,56},
+				{89,92},
+				{17,92},
+				{17,23}
+			}}
+			pathtrigger = {};
+		
+			--give resource to all human players
+			function giveResourceEveryone(resource, value)
+				local player = 0;
+				while humans > player do
+					giveResource(resource, player, value);
+					player = player + 1;
+				end
+			end
+		
+			--reset wavetimer for a new wave
+			function resetWavetimer()
+				giveResourceEveryone("time", wavetimer);
+				startEfficientTimerEvent(wavetimer);
+			end
+			
+		
+		</global>
+		<startup>
+			--I want to control the units, furthermore I use consumable resources as a timer
+			local i = 0
+			while 8 > i do
+				disableAi(i);
+				disableConsume(i);
+				i = i + 1;
+			end
+			setAttackWarningsEnabled(0);
+		
+			--the other player fields are just mirrored and the path automatically calculated
+			local player = 2;
+			while humans >= player do
+				--first copy the path
+				path[player] = {};
+				local i = 1;
+				local length = table.getn(path[1]);
+				--then do the mirroring stuff
+				while length >= i do
+					path[player][i] = {};
+					if (player == 2 or player ==4) then
+						path[player][i][1] = width - path[1][i][1];
+					else
+						path[player][i][1] = path[1][i][1];
+					end
+					
+					if (player == 3 or player == 4) then
+						path[player][i][2] = height - path[1][i][2];
+					else
+						path[player][i][2] = path[1][i][2];
+					end
+					print("after: "..path[player][i][1]..","..path[player][i][2])
+					i = i + 1;
+				end
+				player = player + 1;
+			end
+		
+			--register path triggers
+			player = 1;
+			while humans >= player do
+				pathtrigger[player] = {};
+				local i = 2;
+				local length = table.getn(path[player]);
+				while length >= i do
+					pathtrigger[player][i] = registerCellAreaTriggerEvent({path[player][i][1]-1,path[player][i][2]-1,path[player][i][1]+1,path[player][i][2]+1});
+					i = i + 1;
+				end
+				player = player + 1;
+			end
+		
+		
+			--give initial gold
+			giveResourceEveryone("gold", 20);
+		
+		
+			--start the wavetimer
+			resetWavetimer()
+			
+			addConsoleLangText("welcome","0.1")
+		
+		</startup>
+		
+		<unitDied>
+			--earn gold for killed creeps
+			--TODO money and life tower
+			if unitFaction(lastDeadUnit()) == 4 then
+				local killerfaction = unitFaction(lastDeadUnitKiller());
+				giveResource("gold", killerfaction, bounty[unitName(lastDeadUnit())]);
+				creepsonlane[killerfaction+1] = creepsonlane[killerfaction+1] - 1;
+			end
+		</unitDied>
+		
+		<cellTriggerEvent>
+			if unitFaction(triggeredEventAreaEntryUnitId()) == 4 then
+				local player = 1;
+				while humans >= player do
+					local i = 2;--first one has no triggers
+					local length = table.getn(path[1]);
+					--loop through the path
+					while length >= i do
+						--check if this checkpoint is reached
+						if triggeredCellEventId() == pathtrigger[player][i] then
+							if i == length then
+								--unit reached last checkpoint
+								--destroy unit and loose one life
+								if stillalive[player] == true then
+									giveResource("lives", player-1, -1);
+									if 0 >= resourceAmount("lives", player-1) then
+										local lastplayer = true;
+										local i = 1;
+										while humans > i do
+											if i ~= player then
+												lastplayer = lastplayer and not(stillalive[i]==true);
+											end
+											i = i + 1;
+										end
+										if lastplayer then
+											addConsoleLangText("won",getPlayerName(player-1))
+											showMessage("won", "won")
+											setPlayerAsWinner(player-1);
+											endGame();
+										else
+											addConsoleLangText("lost",getPlayerName(player-1))
+											showMessage("lost", "lost")
+										end
+										stillalive[player] = false;
+										--[[while resourceAmount("gold", player-1) > 0 do
+											giveResource("gold", player-1, -1);
+										end]]--
+										if unitCount(player-1) > 1 then
+											local towers = getUnitsForFaction(player-1, "attack", 0)
+											for i,v in pairs(towers) do 
+												print(i..": "..v.." ("..unitName(v)..")");
+												unitDestroy(v);
+											end
+										end
+										local workers = getUnitsForFaction(player-1, "build", 0)
+										for i,v in pairs(workers) do 
+											print(i..": "..v.." ("..unitName(v)..")");
+											morphToUnit(v,"goldworker",1);
+										end
+									end
+									--TODO kill all towers set gold to 0
+								end
+								creepsonlane[player] = creepsonlane[player] - 1;
+								destroyUnit(triggeredEventAreaEntryUnitId());
+							else 
+								--send unit to next checkpoint
+								givePositionCommand(triggeredEventAreaEntryUnitId(), "move", path[player][i+1]);
+								--BUG: worker also gets this command
+							end
+						end
+						i = i + 1;
+					end
+					player = player + 1;
+				end
+			end
+		
+		</cellTriggerEvent>
+		
+		<timerTriggerEvent>
+			--TODO: no wave-variable needed
+			
+			if (repeatwaves ~= 0 and wave > table.getn(waves)*repeatwaves) then
+				--TODO:only do this once! and only if only one player
+				--setPlayerAsWinner(0) 
+				--endGame()
+				
+				--TODO: do this when the last unit got killed!!!!
+			else
+				local player = 1;
+				
+				--TODO: modify for multiplyer
+				while humans >= player do
+					if stillalive[player] == true then
+						createUnitNoSpacing(getWave(wave)[1], 4, path[player][1]);
+						givePositionCommand(lastCreatedUnit(), "move", path[player][2]);
+						creepsonlane[player] = creepsonlane[player] + 1;
+					end
+					player = player + 1;
+				end
+				
+				--addConsoleLangText("cp",creepqueue)
+				print("remaining creeps: "..creepqueue)
+				
+				if creepqueue == getWave(wave)[2] then
+					--first creep of this wave
+					addConsoleLangText("nextwave",wave)
+					giveResourceEveryone("wave", 1);
+					player = 0;
+					while humans > player do
+						goldinterest = math.floor(resourceAmount("gold", player) * interest + 0.5);
+						if ( stillalive[player+1] == true and goldinterest > 0) then
+							addConsoleLangText("interest",getPlayerName(player),goldinterest)
+							giveResource("gold", player, goldinterest);
+						end
+						player = player + 1;
+					end
+				end
+				
+				if creepqueue == 1 then
+					--this is the last creep of this wave
+					wave = wave + 1;
+					if (repeatwaves == 0 or table.getn(waves)*repeatwaves >= wave) then
+						creepqueue = getWave(wave)[2];
+						resetWavetimer();
+					end
+				else
+					startEfficientTimerEvent(1);
+					creepqueue = creepqueue - 1;
+				end
+			end
+		</timerTriggerEvent>
+	</scripts>	
+</scenario>
+
