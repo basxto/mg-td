@@ -1,0 +1,26 @@
+#!/bin/bash
+#grep -o 'dofile(getSystemMacroValue("$SCENARIO_PATH")..".*")' $1
+#grep -E 's/dofile(getSystemMacroValue("$SCENARIO_PATH").."\([[:alnum:]\/\.]*\)")/\1/g' $1
+#sed -n 's/dofile(getSystemMacroValue("$SCENARIO_PATH").."\([[:alnum:]\/\.]*\)")/\1/p' $1
+
+TMP=$(cat $1)
+
+for MATCH in $(sed -n 's/dofile(getSystemMacroValue("$SCENARIO_PATH").."\([[:alnum:]\/\.]*\)")/\1/p' $1)
+do
+	#TMP=$(echo "$TMP" | sed "s/dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/$(./rdfr $MATCH)/g")
+	#TMP=$(echo "$TMP" | sed "s/dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/{$(./rdfr $MATCH)}/g")
+	#echo "$TMP" | sed "/dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/="
+	line=$(echo "$TMP" | grep -n "dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")" | cut -f1 -d:)
+	TMP=$(echo "$TMP" | head -n $(($line-1)); ./rdfr $MATCH; echo "$TMP" | tail -n +$line)
+	
+	#echo "\n"
+	#echo $MATCH
+	#echo "\n"
+	#echo sed "s/dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/sometext/g"
+	#echo "\n\n\n"
+done
+
+
+echo ""
+echo ""
+echo "$TMP"
