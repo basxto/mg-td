@@ -7,7 +7,9 @@ A tower defense scenario for the free rts megaglest
 
 rdfr (recursive dofile replacer) is a tool for combining multiple luafiles into just one.
 But you can play it with disabled sandbox for development reasons.
-This tool is absolutely primitive, even if it's commented out it's looking for dofile(getSystemMacroValue("$SCENARIO_PATH").."filename"), where getSystemMacroValue("$SCENARIO_PATH") is the same as the directory where this script is executed.
+This tool is absolutely primitive, there should be no other code in the same line!
+It's looking for dofile(getSystemMacroValue("$SCENARIO_PATH").."filename"), where getSystemMacroValue("$SCENARIO_PATH") is the same as the directory where this script is executed.
+Depedencies: bash, cat, sed, echo, cut, head, tail
 
 ## Licenses
 

@@ -10,8 +10,11 @@ do
 	#TMP=$(echo "$TMP" | sed "s/dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/$(./rdfr $MATCH)/g")
 	#TMP=$(echo "$TMP" | sed "s/dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/{$(./rdfr $MATCH)}/g")
 	#echo "$TMP" | sed "/dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/="
-	line=$(echo "$TMP" | grep -n "dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")" | cut -f1 -d:)
-	TMP=$(echo "$TMP" | head -n $(($line-1)); ./rdfr $MATCH; echo "$TMP" | tail -n +$line)
+	line=$(echo "$TMP" | grep -n ".*dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")" | cut -f1 -d:)
+	indent=$(echo "$TMP" | sed -n "${line}p" | sed "s/^\([ \t]*\)dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")/\1/")
+	#echo "$indent abc"
+	TMP=$(echo "$TMP" | head -n $(($line-1));echo "$(./rdfr $MATCH)" | sed "s/^/$indent/"; echo "$TMP" | tail -n +$(($line+1)) )
+	#awk '{print "prefix" $0}' file
 	
 	#echo "\n"
 	#echo $MATCH
