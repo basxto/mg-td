@@ -18,21 +18,25 @@ width = 256;
 --:::functions (can't be saved)
 --TODO special wave-units
 function isHuman(player)
-	return (string.upper(string.sub(getPlayerName(player), 1, 4))~="*AI*")
+	local name = string.upper(getPlayerName(player));
+	print(name)
+	return (name~="CPU" and name~="NET")
 end
 
 function getWave(wave)
 	--return next unit to send,amount of units in this wave
-	local realwave = wave%table.getn(waves);
+	local realwave = wave%#waves;
 	if realwave == 0 then
-		realwave = table.getn(waves);
+		realwave = #waves;
 	end
 	local unit = waves[realwave][1];
-	local amount = math.floor(waves[realwave][2]*( math.pow( 1 + wavemultiplyer , ( (wave-realwave) / table.getn(waves)) )));
+	local amount = math.floor(waves[realwave][2]*( math.pow( 1 + wavemultiplyer , ( (wave-realwave) / #waves) )));
 	return {unit,amount};
 end
 
---give resource to all human players
+--- give resource to all human players
+-- @param recource The resource the players get.
+-- @param value The amount the players get.
 function giveResourceEveryone(resource, value)
 	local player = 0;
 	while humans > player do
@@ -108,7 +112,7 @@ while humans >= player do
 	--first copy the path
 	path[player] = {};
 	local i = 1;
-	local length = table.getn(path[1]);
+	local length = #path[1];
 	--then do the mirroring stuff
 	while length >= i do
 		path[player][i] = {};
@@ -131,17 +135,5 @@ end
 
 
 pathtrigger = {};
---register path triggers
-player = 1;
-while humans >= player do
-	pathtrigger[player] = {};
-	local i = 2;
-	local length = table.getn(path[player]);
-	while length >= i do
-		pathtrigger[player][i] = registerCellAreaTriggerEvent({path[player][i][1]-1,path[player][i][2]-1,path[player][i][1]+1,path[player][i][2]+1});
-		i = i + 1;
-	end
-	player = player + 1;
-end
 
 

@@ -1,6 +1,6 @@
 --TODO: no wave-variable needed
 
-if (repeatwaves ~= 0 and wave > table.getn(waves)*repeatwaves) then
+if (repeatwaves ~= 0 and wave > #waves*repeatwaves) then
 	--TODO:only do this once! and only if only one player
 	--setPlayerAsWinner(0) 
 	--endGame()
@@ -40,7 +40,7 @@ end
 if creepqueue == 1 then
 	--this is the last creep of this wave
 	wave = wave + 1;
-	if (repeatwaves == 0 or table.getn(waves)*repeatwaves >= wave) then
+	if (repeatwaves == 0 or #waves*repeatwaves >= wave) then
 		creepqueue = getWave(wave)[2];
 		resetWavetimer();
 	end
