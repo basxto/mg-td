@@ -8,7 +8,7 @@
 --:::these variables are needed for table calculation, restored variables are available _after_ execution of this section
 
 --how many human players do we have? need to detect, which slots are really used, please use them in a continous order!
-humans=4;
+humans=1;
 
 --mapsize
 height = 256;
@@ -70,14 +70,14 @@ waves2 = {--for testing
 	{{"behemoth",1}},
 	{{"mummy",3},{"behemoth",2}}--is that even possible?
 }
-waves = {
+_waves = {
 	{"pig",3},
 	{"sheep",4},
 	{"mummy",5},
 	{"behemoth",1}
 }
 
-wavespig = {--for testing
+waves = {--for testing
 	{"pig",1}
 }
 
