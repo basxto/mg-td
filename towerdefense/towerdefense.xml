@@ -4,12 +4,12 @@
 	<difficulty value="3"/>
 	<players>
 		<player control="human" faction="towers" team="1"/>
-		<!--player control="network" faction="towers" team="2"/>
+		<player control="network" faction="towers" team="2"/>
 		<player control="network" faction="towers" team="3"/>
-		<player control="network" faction="towers" team="4"/-->
-		<player control="cpu" faction="towers" team="2"/>
+		<player control="network" faction="towers" team="4"/>
+		<!--player control="cpu" faction="towers" team="2"/>
 		<player control="cpu" faction="towers" team="3"/>
-		<player control="cpu" faction="towers" team="4"/>
+		<player control="cpu" faction="towers" team="4"/-->
 		<player control="cpu" faction="groundcreeps" team="5"/>
 		<player control="cpu" faction="groundcreeps" team="5"/>
 		<player control="cpu" faction="groundcreeps" team="5"/>
@@ -25,26 +25,39 @@
 	<default-victory-conditions value="false"/>
 	<scripts>
 		<global>
+			print("global");
 			package.path = getSystemMacroValue("$SCENARIO_PATH") .. "/?.lua;" .. package.path;
-			--dofile(getSystemMacroValue("$SCENARIO_PATH").."global.lua")
-			require "lua.global"
+			JSON = require "libs.JSON"
+			
+			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/global.lua")
+			--require "lua.global"
 		</global>
 		<startup>
-			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/startup.lua")
-			require "lua.startup"
+			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/startup.lua")
+			--require "lua.startup"
 		</startup>
 		<unitDied>
-			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/unitDied.lua")
-			require "lua.unitDied"
+			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/unitDied.lua")
+			--require "lua.unitDied"
 		</unitDied>
 		<cellTriggerEvent>
-			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/cellTriggerEvent.lua")
-			require "lua.cellTriggerEvent"
+			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/cellTriggerEvent.lua")
+			--require "lua.cellTriggerEvent"
 		</cellTriggerEvent>
 		<timerTriggerEvent>
-			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/timerTriggerEvent.lua")
-			require "lua.timerTriggerEvent"
+			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/timerTriggerEvent.lua")
+			--require "lua.timerTriggerEvent"
 		</timerTriggerEvent>
+		<onSave>
+			print("saaaave!\n");
+			storeSaveGameData("pathtrigger",JSON:encode(pathtrigger));
+		</onSave>
+        <onLoad>
+			JSON = require "libs.JSON"
+			--print("onload");
+            print(loadSaveGameData("pathtrigger"));
+            pathtrigger = JSON:decode(loadSaveGameData("pathtrigger"));
+        </onLoad>
 	</scripts>	
 </scenario>
 

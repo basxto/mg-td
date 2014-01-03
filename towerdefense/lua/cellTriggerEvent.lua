@@ -32,7 +32,7 @@ end
 if unitFaction(triggeredEventAreaEntryUnitId()) == 4 then
 	for player = 1, humans do
 		for i = 2, #path[player] do
-			print(triggeredCellEventId().." == "..pathtrigger[player][i]);
+			--print(triggeredCellEventId().." == "..pathtrigger[player][i]);
 			if triggeredCellEventId() == pathtrigger[player][i] then --this is the right trigger!!!
 				if i == #path[player] then--could be last checkpoint
 					lastCheckpoint(player);

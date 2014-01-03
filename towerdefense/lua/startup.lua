@@ -13,29 +13,22 @@ interest = 0.01;
 --because I do not want to send all creeps at once, this should also improve pathfinding
 creepqueue = getWave(wave)[2];
 
---!!!!!!!!!!!!!!!is this saved and restored?
+--(is this saved and restored)
 --I want to control the units, furthermore I use consumable resources as a timer
-local i = 0
-while 8 > i do
-	disableAi(i);
-	disableConsume(i);
-	i = i + 1;
+for i = 1, 8 do
+	disableAi(i-1);
+	disableConsume(i-1);
 end
 setAttackWarningsEnabled(0);
 
 
 
 --register path triggers
-player = 1;
-while humans >= player do
+for player = 1, humans do
 	pathtrigger[player] = {};
-	local i = 2;
-	local length = #path[player];
-	while length >= i do
+	for i = 2, #path[player] do
 		pathtrigger[player][i] = registerCellAreaTriggerEvent({path[player][i][1]-1,path[player][i][2]-1,path[player][i][1]+1,path[player][i][2]+1});
-		i = i + 1;
 	end
-	player = player + 1;
 end
 
 
@@ -46,6 +39,6 @@ giveResourceEveryone("gold", 20);
 
 
 --start the wavetimer
-resetWavetimer()
+resetWavetimer();
 
 addConsoleLangText("welcome","0.2")

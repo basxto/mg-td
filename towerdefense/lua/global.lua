@@ -107,14 +107,11 @@ path = {{
 
 --the map always consists of 4 similar, but mirrored fields
 --the other player fields are just mirrored and the path automatically calculated
-local player = 2;
-while humans >= player do
+for player = 2, humans do
 	--first copy the path
 	path[player] = {};
-	local i = 1;
-	local length = #path[1];
 	--then do the mirroring stuff
-	while length >= i do
+	for i = 1, #path[1] do
 		path[player][i] = {};
 		if (player == 2 or player ==4) then
 			path[player][i][1] = width - path[1][i][1];
@@ -128,9 +125,7 @@ while humans >= player do
 			path[player][i][2] = path[1][i][2];
 		end
 		print("after: "..path[player][i][1]..","..path[player][i][2])
-		i = i + 1;
 	end
-	player = player + 1;
 end
 
 

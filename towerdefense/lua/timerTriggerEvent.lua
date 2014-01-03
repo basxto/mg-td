@@ -8,15 +8,13 @@ if (repeatwaves ~= 0 and wave > #waves*repeatwaves) then
 	--TODO: do this when the last unit got killed!!!!
 else
 
-local player = 1;
 --TODO: modify for multiplyer
-while humans >= player do
+for player = 1, humans do
 	if stillalive[player] == true then
 		createUnitNoSpacing(getWave(wave)[1], 4, path[player][1]);
 		givePositionCommand(lastCreatedUnit(), "move", path[player][2]);
 		creepsonlane[player] = creepsonlane[player] + 1;
 	end
-	player = player + 1;
 end
 
 --addConsoleLangText("cp",creepqueue)
@@ -26,14 +24,12 @@ if creepqueue == getWave(wave)[2] then
 	--first creep of this wave
 	addConsoleLangText("nextwave",wave)
 	giveResourceEveryone("wave", 1);
-	player = 0;
-	while humans > player do
-		goldinterest = math.floor(resourceAmount("gold", player) * interest + 0.5);
-		if ( stillalive[player+1] == true and goldinterest > 0) then
-			addConsoleLangText("interest",getPlayerName(player),goldinterest)
-			giveResource("gold", player, goldinterest);
+	for player = 1, humans do
+		goldinterest = math.floor(resourceAmount("gold", player-1) * interest + 0.5);
+		if ( stillalive[player] == true and goldinterest > 0) then
+			addConsoleLangText("interest",getPlayerName(player-1),goldinterest)
+			giveResource("gold", player-1, goldinterest);
 		end
-		player = player + 1;
 	end
 end
 
