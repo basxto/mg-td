@@ -1,0 +1,8 @@
+#!/bin/bash
+#Recursive Included Files Finder
+for MATCH in $(sed -n 's/.*require "\([[:alnum:]\.]*\)"/\1/p' $1)
+do
+	filename=$(echo "$MATCH" | sed "s/\./\//g").lua;
+	echo $filename;
+	$0 $filename;
+done

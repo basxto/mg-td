@@ -1,0 +1,174 @@
+<?xml version="1.0" standalone="no"?>
+
+<unit>
+
+	<!-- *** parameters *** -->
+
+	<parameters>
+		<size value="1"/>
+		<height value="2"/>
+		<max-hp value="1" regeneration="0"/>
+		<max-ep value="0"/>
+		<armor value="0"/>
+		<armor-type value="default"/>
+		<sight value="1"/><!-- else worker will run away all the time -->
+		<time value="40"/>
+		<multi-selection value="false"/>
+		<cellmap value="false"/>
+		<levels/>
+		<fields>
+			<field value="land"/>
+		</fields>	
+		<properties/>
+		<light enabled="false"/>
+		<unit-requirements/>
+		<upgrade-requirements/>
+		<resource-requirements>
+			<resource name="time" amount="1"/>
+			<resource name="gold" amount="0"/><!-- needs to be in the interface -->
+			<resource name="wave" amount="0"/><!-- needs to be in the interface -->
+			<resource name="lives" amount="0"/><!-- needs to be in the interface -->
+		</resource-requirements>
+		<resources-stored>
+			<resource name= "gold" amount="2000"/>
+			<resource name= "time" amount="60"/>
+			<resource name= "wave" amount="4"/>
+			<resource name= "lives" amount="10"/>
+		</resources-stored>
+		<image path="images/worker.bmp"/>
+		<image-cancel path="../../images/towers_cancel.bmp"/>
+		<meeting-point value="false"/>
+		<selection-sounds enabled="false"/>
+		<command-sounds enabled="false"/>
+	</parameters>
+
+
+	<!-- *** skills *** -->
+
+	<skills>
+	
+		<skill>
+			<type value="stop"/>
+			<name value="stop_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="1000"/>
+			<anim-speed value="55"/>
+			<animation path="models/worker_standing.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+
+		<skill>
+			<type value="move"/>
+			<name value="move_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="1520"/><!-- 190 -->
+			<anim-speed value="1040"/><!-- 130 -->
+			<animation path="models/worker_walking.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
+		
+		<skill>
+			<type value="build"/>
+			<name value="build_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="105"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_building.g3d"/>
+			<sound enabled="false"/>
+		</skill>	
+		
+		<skill>
+			<type value="repair"/>
+			<name value="repair_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="40"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_building.g3d"/>
+			<sound enabled="false" />
+		</skill>		
+		
+		<skill>
+			<type value="die"/>
+			<name value="die_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="90"/>
+			<anim-speed value="90"/>
+			<animation path="models/worker_dying.g3d"/>
+			<sound enabled="false"/>			
+			<fade value="false"/>
+		</skill>						
+		
+		<skill>
+			<type value="morph"/>
+			<name value="morph_skill"/>		
+			<ep-cost value="0"/>
+			<speed value="500"/>
+			<anim-speed value="100"/>
+			<animation path="models/worker_standing.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+	</skills>
+
+	<!-- *** commands *** -->
+	
+	<commands>
+		
+		<command>
+			<type value= "stop"/>
+			<name value="stop"/>
+			<image path="../../images/towers_stop.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<stop-skill value="stop_skill"/>
+		</command>
+
+		<command>
+			<type value= "move"/>
+			<name value="move"/>
+			<image path="../../images/towers_move.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<move-skill value="move_skill"/>
+		</command>
+
+		<command>
+			<type value= "repair"/>
+			<name value="repair"/>
+			<image path="../../images/towers_repair.bmp"/>
+			
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<move-skill value="move_skill"/>
+			<repair-skill value="repair_skill"/>
+			<repaired-units>
+				<unit name="defense_tower"/>
+			</repaired-units>
+		</command>
+		
+		<command>
+			<type value= "build"/>
+			<name value="build_advanced"/>
+			<image path="../../images/towers_build.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<move-skill value="move_skill"/>
+			<build-skill value="build_skill"/>
+			<buildings>
+				<building name="defense_tower"/>
+				<!--building name="snake_basket"/>
+				
+				<building name="golem"/>
+				<building name="air_pyramid"/>
+				<building name="sphinx"/>
+				<building name="tower_of_souls"/>
+				<building name="mistletree"/-->
+			</buildings>
+			<start-sound enabled="false"/>
+			<built-sound enabled="false"/>	
+		</command>
+
+
+	</commands>
+</unit>

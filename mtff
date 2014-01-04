@@ -1,0 +1,10 @@
+#!/bin/bash
+#Map and Tech Files Finder
+for MATCH in $(sed -n 's/.*<map[ ]*value="\([[:alnum:]]*\)"[ /\]*>/\1/p' $1)
+do
+	echo $MATCH.gbm
+done
+for MATCH in $(sed -n 's/.*<tech-tree[ ]*value="\([[:alnum:]]*\)"[ /\]*>/\1/p' $1)
+do
+	echo $MATCH
+done

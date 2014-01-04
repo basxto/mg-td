@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+
+<faction>
+	<starting-resources>
+		<resource name="gold" amount="5000"/>	
+	</starting-resources>
+	<starting-units>
+	</starting-units>	
+	<music value="false"/>
+</faction>
+
+

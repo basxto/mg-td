@@ -1,9 +1,10 @@
 #!/bin/bash
-TMP=$(cat $1)
+#Recursive DoFile Replacer
+TMP=$(cat $1);
 for MATCH in $(sed -n 's/dofile(getSystemMacroValue("$SCENARIO_PATH").."\([[:alnum:]\/\.]*\)")/\1/p' $1)
 do
-	line=$(echo "$TMP" | grep -n ".*dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")" | cut -f1 -d:)
-	indent=$(echo "$TMP" | sed -n "${line}p" | sed "s;^\([[:space:]]*\)dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\");\1;")
-	TMP=$(echo "$TMP" | head -n $(($line-1));echo "$(./rdfr $MATCH)" | sed "s/^/$indent/"; echo "$TMP" | tail -n +$(($line+1)) )
+	line=$(echo "$TMP" | grep -n ".*dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\")" | cut -f1 -d:);
+	indent=$(echo "$TMP" | sed -n "${line}p" | sed "s;^\([[:space:]]*\)dofile(getSystemMacroValue(\"\$SCENARIO_PATH\")..\"$MATCH\");\1;");
+	TMP=$(echo "$TMP" | head -n $(($line-1));echo "$($0 $MATCH)" | sed "s/^/$indent/"; echo "$TMP" | tail -n +$(($line+1)) );
 done
-echo "$TMP"
+echo "$TMP";

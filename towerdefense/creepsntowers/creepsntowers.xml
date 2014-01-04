@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+
+<tech-tree>
+	<description value="towerdefense tech tree"/>
+	
+	<attack-types>
+		<attack-type name="default"/>
+	</attack-types>
+	
+	<armor-types>
+		<armor-type name="default"/>
+		<armor-type name="weak"/>
+	</armor-types>
+	
+	<damage-multipliers>
+		<damage-multiplier attack="default" armor="weak" value="1.5"/>
+	</damage-multipliers>
+</tech-tree>
