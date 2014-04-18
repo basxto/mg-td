@@ -5,9 +5,11 @@ if unitFaction(lastDeadUnit()) == 4 then
 	local killerfaction = unitFaction(lastDeadUnitKiller());
 	if lastDeadUnitKillerName() == "defense_tower" then
 		giveResource("lives", killerfaction, 1);
-		giveResource("gold", killerfaction, bounty[lastDeadUnitName()]);
+		addConsoleLangText("interest",TD.settings.bounty[lastDeadUnitName()], lastDeadUnitName())
+		giveResource("gold", killerfaction, TD.settings.bounty[lastDeadUnitName()]);
 	else
-		giveResource("gold", killerfaction, bounty[lastDeadUnitName()]);
+		addConsoleLangText("interest",killerfaction, bounty[lastDeadUnitName()])
+		giveResource("gold", killerfaction, TD.settings.bounty[lastDeadUnitName()]);
 	end
-	creepsonlane[killerfaction+1] = creepsonlane[killerfaction+1] - 1;
+	TD.waveManager.onlane[killerfaction+1] = TD.waveManager.onlane[killerfaction+1] - 1;
 end

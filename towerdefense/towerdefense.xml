@@ -7,18 +7,14 @@
 		<player control="network" faction="towers" team="1"/>
 		<player control="network" faction="towers" team="1"/>
 		<player control="network" faction="towers" team="1"/>
-		<!--player control="cpu" faction="towers" team="2"/>
-		<player control="cpu" faction="towers" team="3"/>
-		<player control="cpu" faction="towers" team="4"/-->
 		<player control="cpu" faction="creeps" team="5"/>
 		<player control="cpu" faction="creeps" team="5"/>
 		<player control="cpu" faction="creeps" team="5"/>
 		<player control="cpu" faction="creeps" team="5"/>
-		
+
 	</players>
 	<map value="rounddefense" />
 	<tileset value="hell"/>
-	<!--tech-tree value="creepsntowers"/-->
 	<tech-tree value="creepsntowers"/>
 	<default-resources value="true"/>
 	<default-units value="true"/>
@@ -31,25 +27,19 @@
 			MgEnums = require "libs.MgEnums"
 			JSON = require "libs.JSON"
 			require "compatibility.3.9.0"
-			
-			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/global.lua")
-			--r-equire "lua.global"
+			TD = require "lua.towerdefense"
 		</global>
 		<startup>
 			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/startup.lua")
-			--r-equire "lua.startup"
 		</startup>
 		<unitDied>
 			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/unitDied.lua")
-			--r-equire "lua.unitDied"
 		</unitDied>
 		<cellTriggerEvent>
 			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/cellTriggerEvent.lua")
-			--r-equire "lua.cellTriggerEvent"
 		</cellTriggerEvent>
 		<timerTriggerEvent>
 			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/timerTriggerEvent.lua")
-			--r-equire "lua.timerTriggerEvent"
 		</timerTriggerEvent>
 		<onSave>
 			print("saaaave!\n");
@@ -61,6 +51,6 @@
             print(loadSaveGameData("pathtrigger"));
             pathtrigger = JSON:decode(loadSaveGameData("pathtrigger"));
         </onLoad>
-	</scripts>	
+	</scripts>
 </scenario>
 

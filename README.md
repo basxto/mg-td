@@ -13,7 +13,8 @@ Depedencies: bash, cat, sed, echo, cut, head, tail
 
 ## Licenses
 
-
+The LUA JSON library ist licensed CC-BY by Jeffrey Friedl
+  * https://creativecommons.org/licenses/by/3.0/deed.en_US
 All LUA code is licensed under the terms of Apache License, Version 2.0
   * https://www.apache.org/licenses/LICENSE-2.0.html
 The rest is licensed under the terms of Creative Commons Attribution-ShareAlike 3.0 Unported 
