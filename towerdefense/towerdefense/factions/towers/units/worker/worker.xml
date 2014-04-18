@@ -264,7 +264,7 @@
 				<building name="sphinx"/>
 				<building name="tower_of_souls"/>
 				<building name="mistletree"/>
-                	</buildings>
+            	</buildings>
 			<start-sound enabled="false"/>
 			<built-sound enabled="true">
 				<sound-file path="$COMMONDATAPATH/sounds/worker_work_end1.wav"/>

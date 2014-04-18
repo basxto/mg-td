@@ -105,8 +105,8 @@
 			<type value="attack"/>
 			<name value="attack_skill"/>		
 			<ep-cost value="0"/>
-			<speed value="160"/>
-			<anim-speed value="180"/>
+			<speed value="80"/>
+			<anim-speed value="90"/>
 			<animation path="models/defense_tower.g3d"/>
 			<sound enabled="false" start-time="0"/>
 			<attack-strenght value="100"/>
@@ -118,11 +118,11 @@
 				<field value="land"/>
 				<field value="air"/>
 			</attack-fields>
-			<splash value="true">
+			<!--splash value="true">
 				<radius value="1"/>
 				<damage-all value="false"/>
 				<particle value="false"/>
-			</splash>
+			</splash-->
 			<projectile value="true">
 				<particle value="true" path="particle_proj.xml"/>
 				<sound enabled="false"/>
@@ -156,6 +156,16 @@
 			<sound enabled="false"/>
 		</skill>
 
+		<skill>
+			<type value="move"/>
+			<name value="move_skill"/>		
+			<ep-cost value="1"/>
+			<speed value="1"/>
+			<anim-speed value="10"/>
+			<animation path="models/defense_tower.g3d"/>
+			<sound enabled="false"/>
+		</skill>
+
 
 	</skills>
 	
@@ -168,6 +178,16 @@
 			<unit-requirements/>
 			<upgrade-requirements/>
 			<stop-skill value="stop_skill"/>
+		</command>
+
+		<command>
+			<type value="attack"/>
+			<name value="attack"/>
+			<image path="../../images/towers_attack_on.bmp"/>
+			<unit-requirements/>
+			<upgrade-requirements/>
+			<move-skill value="move_skill"/>
+			<attack-skill value="attack_skill"/>
 		</command>
 
 		<command>

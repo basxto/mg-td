@@ -1390,7 +1390,7 @@
 # CommandName_molotov=molotov
 # CommandName_fire_arrow=fire_arrow
 # CommandName_hold_position=hold_position
-# UnitTypeName_pig=pig
+ UnitTypeName_pig=Schwein
 ; --------------------
 ; Levels for this Unit
 ; -------------------------------

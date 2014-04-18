@@ -11,8 +11,7 @@ else
 --TODO: modify for multiplyer
 for player = 1, humans do
 	if stillalive[player] == true then
-		createUnitNoSpacing(getWave(wave)[1], 4, path[player][1]);
-		givePositionCommand(lastCreatedUnit(), "move", path[player][2]);
+		givePositionCommand(createAndGetUnitNoSpacing(getWave(wave)[1], 4, path[player][1]), "move", path[player][2]);
 		creepsonlane[player] = creepsonlane[player] + 1;
 	end
 end

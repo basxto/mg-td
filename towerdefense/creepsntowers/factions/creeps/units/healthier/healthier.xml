@@ -42,7 +42,7 @@
 			<type value="stop"/>
 			<name value="stop_skill"/>
 			<ep-cost value="0"/>
-			<speed value="1000"/>
+			<speed value="100"/>
 			<anim-speed value="55"/>
 			<animation path="models/pig_standing.g3d"/>
 			<sound enabled="false"/>

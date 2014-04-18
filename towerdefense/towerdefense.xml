@@ -4,9 +4,9 @@
 	<difficulty value="3"/>
 	<players>
 		<player control="human" faction="towers" team="1"/>
-		<player control="network" faction="towers" team="2"/>
-		<player control="network" faction="towers" team="3"/>
-		<player control="network" faction="towers" team="4"/>
+		<player control="network" faction="towers" team="1"/>
+		<player control="network" faction="towers" team="1"/>
+		<player control="network" faction="towers" team="1"/>
 		<!--player control="cpu" faction="towers" team="2"/>
 		<player control="cpu" faction="towers" team="3"/>
 		<player control="cpu" faction="towers" team="4"/-->
@@ -16,8 +16,9 @@
 		<player control="cpu" faction="creeps" team="5"/>
 		
 	</players>
-	<map value="towerdefense" />
+	<map value="rounddefense" />
 	<tileset value="hell"/>
+	<!--tech-tree value="creepsntowers"/-->
 	<tech-tree value="creepsntowers"/>
 	<default-resources value="true"/>
 	<default-units value="true"/>
@@ -27,7 +28,9 @@
 		<global>
 			print("global");
 			package.path = getSystemMacroValue("$SCENARIO_PATH") .. "/?.lua;" .. package.path;
+			MgEnums = require "libs.MgEnums"
 			JSON = require "libs.JSON"
+			require "compatibility.3.9.0"
 			
 			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/global.lua")
 			--r-equire "lua.global"

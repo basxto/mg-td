@@ -33,7 +33,7 @@
 			<resource name= "gold" amount="2000"/>
 			<resource name= "time" amount="60"/>
 			<resource name= "wave" amount="4"/>
-			<resource name= "lives" amount="10"/>
+			<resource name= "lives" amount="40"/>
 		</resources-stored>
 		<image path="images/worker.bmp"/>
 		<image-cancel path="../../images/towers_cancel.bmp"/>

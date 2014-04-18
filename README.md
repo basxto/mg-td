@@ -14,8 +14,8 @@ Depedencies: bash, cat, sed, echo, cut, head, tail
 ## Licenses
 
 
-All LUA code is licensed under the terms of GPL v3
-  * https://www.gnu.org/licenses/gpl.html
+All LUA code is licensed under the terms of Apache License, Version 2.0
+  * https://www.apache.org/licenses/LICENSE-2.0.html
 The rest is licensed under the terms of Creative Commons Attribution-ShareAlike 3.0 Unported 
   * https://creativecommons.org/licenses/by-sa/3.0/
   
@@ -31,3 +31,15 @@ air_pyramid, defense_tower, guard_tower, snake_basket, worker, barracks, eagle_p
 creeps:
 
 behemoth, genie, mummy, pig, sheep
+
+
+## The game
+
+I had planned to include dozens of creeps, towers and waves.
+But got some fundamental problems:
+  * You can’t give Buildings a target to attack
+  * If you implement towers as units, they rotate
+  * either way their automatic atticking strategy is just dump
+  * It’s hard to hit fast units over a bigger range
+That’s why it’s better to have less units, waves and towers.
+Around 4 creeps and 4 towers should be sufficient.

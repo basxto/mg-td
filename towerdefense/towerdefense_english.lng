@@ -3,7 +3,15 @@ pos=position: %s, %s
 won=%s died at last
 lost=%s just died
 nextwave=Wave #%s is coming!
+wave=Wave #%s
 interest=%s gained %s gold!
 DESCRIPTION=A TowerDefense game
 SCENARIO_NAME=TowerDefense
 TUTORIAL_NAME=TowerDefense
+manual=You have to hinder the creep waves to reach the end of the path. You do this by building towers, who kill those creeps. You gain gold when you kill creeps, you also gain a percentage of your credits as interest at the end of each wave. You choose your worker by pressing key 1.
+ = 
+ 
+ 
+##debug
+movdate=update move command
+reached=reached checkpoint %s

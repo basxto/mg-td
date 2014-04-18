@@ -5,7 +5,8 @@ scenarioVersion="0.2"
 --workers resources should be the same
 wave = 1;				--the wave which is spawned at the moment or the next one which will be spawned
 maxwaves = 5;
-wavetimer = 10;
+wavetimer = 40;
+spawndelayed = false;
 
 repeatwaves = 0;		--0 is infinit
 wavemultiplyer = 0.3;
@@ -30,18 +31,26 @@ for player = 1, humans do
 	pathtrigger[player] = {};
 	for i = 2, #path[player] do
 		pathtrigger[player][i] = registerCellAreaTriggerEvent({path[player][i][1]-1,path[player][i][2]-1,path[player][i][1]+1,path[player][i][2]+1});
+		if debug then
+			showMarker(1000000, player-1, "trigger", "group.png", {path[player][i][1],path[player][i][2]});
+		end
 	end
 	--add worker to group 1, no other units have build command
-	addUnitToGroupSelection(getUnitsForFaction(player - 1, "build", 0)[1], 1);
+	local worker = getUnitsForFaction(player - 1, "build", 0)[1];
+	addUnitToGroupSelection(worker, 1);
+	selectUnit(worker);
 end
-
 
 --give initial gold
 giveResourceEveryone("gold", 20);
 
+if debug then
+	givePositionCommand(createAndGetUnitNoSpacing("pig", 4, path[1][1]), "move", path[1][2]);
+else
+	--start the wavetimer
+	resetWavetimer();
+end
 
---start the wavetimer
-resetWavetimer();
 
 addConsoleLangText("welcome",scenarioVersion);
 showMessage("manual"," ");
