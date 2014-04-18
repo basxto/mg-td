@@ -159,6 +159,12 @@ waveManager.creepqueue = waveManager:getWave(settings.wave)[2];
 M.waveManager = waveManager;
 
 
+--M.startup = require(lua.startup);
+--M.timerTriggerEvent = require(lua.timerTriggerEvent);
+--M.cellTriggerEvent = require(lua.cellTriggerEvent);
+--M.unitDied = require(lua.unitDied);
+
+
 -------executed once
 
 --mirrored: the map always consists of 4 similar, but mirrored fields

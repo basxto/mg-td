@@ -30,16 +30,24 @@
 			TD = require "lua.towerdefense"
 		</global>
 		<startup>
-			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/startup.lua")
+			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/startup.lua")
+			--TD:startup();
+			(require "lua.startup")();
 		</startup>
 		<unitDied>
-			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/unitDied.lua")
+			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/unitDied.lua");
+			--TD:unitDied();
+			(require "lua.unitDied")();
 		</unitDied>
 		<cellTriggerEvent>
-			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/cellTriggerEvent.lua")
+			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/cellTriggerEvent.lua");
+			--TD:cellTriggerEvent();
+			(require "lua.cellTriggerEvent")();
 		</cellTriggerEvent>
 		<timerTriggerEvent>
-			dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/timerTriggerEvent.lua")
+			--dofile(getSystemMacroValue("$SCENARIO_PATH").."lua/timerTriggerEvent.lua");
+			--TD:timerTriggerEvent();
+			(require "lua.timerTriggerEvent")();
 		</timerTriggerEvent>
 		<onSave>
 			print("saaaave!\n");
