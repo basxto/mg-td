@@ -97,14 +97,14 @@ waves = {--for testing
 	{{"healthier",4}},
 	{{"defense",4}},
 	{{"pig",4}},
-	
+
 	{{"pig",4}},
 	{{"pig",4}},
 	{{"pig",4}},
 	{{"pig",4}},
 	{{"pig",4}},
 	{{"pig",4}},
-	
+
 	{{"pig",4}},
 	{{"pig",4}},
 	{{"pig",4}},
@@ -125,6 +125,8 @@ _waves = {--for testing
 
 --creep bounty
 bounty = {
+	normal=1,
+	defense=1,
 	pig=1,
 	sheep=2,
 	mummy=3,
@@ -175,7 +177,7 @@ for player = 2, humans do
 		else
 			path[player][i][1] = x;
 		end
-		
+
 		if (player == 3 or player == 4) then
 			path[player][i][2] = height - y;
 		else
